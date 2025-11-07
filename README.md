@@ -95,6 +95,25 @@ This will:
 4. Display optimization results
 5. Save detailed metrics to `results.csv`
 
+### Generate Visualizations
+
+After running the benchmark, generate visual analysis:
+
+```bash
+python visualize_results.py
+```
+
+This creates 8 comprehensive charts plus a summary report in the `visualizations/` folder:
+1. **Query Time Comparison** - Bar chart comparing all configurations
+2. **Query Time Heatmap** - 2D heatmap showing parameter interactions
+3. **Parameter Impact Analysis** - Box plots for each HNSW parameter
+4. **Throughput Comparison** - Horizontal bar chart of queries/sec
+5. **Recall vs Latency** - Scatter plot showing tradeoffs
+6. **Query Time Distribution** - Box plots grouped by configuration
+7. **Combined Performance Score** - Normalized score combining all metrics
+8. **Configuration Rankings** - Stacked bar chart showing cumulative ranks
+9. **Analysis Summary** - Text report with key findings
+
 ### Individual Modules
 
 **Test Embedding Generation:**
@@ -153,12 +172,14 @@ MVP/
 ├── embedding_generator.py     # Gemini API integration
 ├── weaviate_client.py        # Weaviate database operations
 ├── benchmark.py              # Performance benchmarking
+├── visualize_results.py      # Generate visualizations from results
 ├── requirements.txt          # Python dependencies
 ├── .env.example             # Environment variables template
 ├── .gitignore              # Git ignore rules
 ├── README.md               # This file
 ├── results.csv             # Benchmark results (generated)
-└── embeddings_cache/       # Cached embeddings (generated)
+├── embeddings_cache/       # Cached embeddings (generated)
+└── visualizations/         # Generated charts and analysis (generated)
 ```
 
 ## 🔧 Configuration
@@ -227,7 +248,21 @@ ModuleNotFoundError: No module named 'weaviate'
 pip install -r requirements.txt
 ```
 
-## 🔄 Next Steps
+## � Visualization Features
+
+The `visualize_results.py` script provides:
+
+- **Automated Chart Generation**: Creates 8 different visualization types
+- **High-Resolution Exports**: 300 DPI PNG images for presentations
+- **Color-Coded Insights**: Uses color gradients to highlight performance
+- **Statistical Analysis**: Box plots showing parameter distributions
+- **Comparative Views**: Side-by-side heatmaps for max_connections
+- **Best Configuration Highlighting**: Marks optimal configs with borders/stars
+- **Text Summary Report**: Key findings in plain text format
+
+All visualizations are saved to the `visualizations/` directory and can be easily shared or embedded in reports.
+
+## �🔄 Next Steps
 
 Extend this MVP with:
 
@@ -235,8 +270,9 @@ Extend this MVP with:
 2. **Advanced Metrics**: Add precision, F1-score, MRR
 3. **Real Dataset**: Test with larger, domain-specific corpora
 4. **Dynamic Configuration**: Auto-tune parameters based on workload
-5. **Web Interface**: Build a dashboard for interactive benchmarking
-6. **Production Optimization**: Add monitoring, logging, and alerts
+5. **Interactive Visualizations**: Add Plotly for interactive charts
+6. **Web Interface**: Build a dashboard for interactive benchmarking
+7. **Production Optimization**: Add monitoring, logging, and alerts
 
 ## 📝 License
 

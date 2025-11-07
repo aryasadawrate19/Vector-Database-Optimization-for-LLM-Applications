@@ -128,11 +128,11 @@ def print_results_summary(df: pd.DataFrame, best_config: dict):
     print_header("VECTOR DATABASE OPTIMIZATION RESULTS")
     
     if df.empty or not best_config:
-        print("❌ No valid results to display.")
+        print("No valid results to display.")
         return
     
     # Overall statistics
-    print("📊 OVERALL STATISTICS")
+    print("OVERALL STATISTICS")
     print(f"{'─'*70}")
     print(f"Total Configurations Tested: {len(df)}")
     print(f"Corpus Size: {best_config.get('num_queries', 'N/A')} documents")
@@ -140,7 +140,7 @@ def print_results_summary(df: pd.DataFrame, best_config: dict):
     print(f"Iterations per Config: {best_config.get('num_iterations', 'N/A')}")
     
     # Best configuration
-    print(f"\n🏆 BEST CONFIGURATION (Balanced Optimization)")
+    print(f"\nBEST CONFIGURATION (Balanced Optimization)")
     print(f"{'─'*70}")
     print(f"Index Type: HNSW")
     print(f"ef_construction: {best_config.get('ef_construction', 'N/A')}")
@@ -148,7 +148,7 @@ def print_results_summary(df: pd.DataFrame, best_config: dict):
     print(f"max_connections: {best_config.get('max_connections', 'N/A')}")
     
     # Performance metrics
-    print(f"\n⚡ PERFORMANCE METRICS")
+    print(f"\nPERFORMANCE METRICS")
     print(f"{'─'*70}")
     print(f"Average Query Time: {best_config.get('avg_query_time_ms', 'N/A')} ms")
     print(f"Std Dev Query Time: {best_config.get('std_query_time_ms', 'N/A')} ms")
@@ -163,7 +163,7 @@ def print_results_summary(df: pd.DataFrame, best_config: dict):
     print(f"Insert Time: {best_config.get('insert_time_sec', 'N/A')} sec")
     
     # Top 3 configurations
-    print(f"\n📋 TOP 3 CONFIGURATIONS BY QUERY LATENCY")
+    print(f"\nTOP 3 CONFIGURATIONS BY QUERY LATENCY")
     print(f"{'─'*70}")
     
     df_sorted = df.sort_values('avg_query_time_ms')
@@ -193,37 +193,37 @@ def main():
     
     try:
         # Step 1: Initialize Embedding Generator
-        print("📦 Step 1: Initializing Embedding Generator...")
+        print("Step 1: Initializing Embedding Generator...")
         generator = EmbeddingGenerator()
         embedding_dim = generator.get_embedding_dimension()
-        print(f"   ✓ Embedding dimension: {embedding_dim}\n")
+        print(f"Embedding dimension: {embedding_dim}\n")
         
         # Step 2: Load Data
-        print("📚 Step 2: Loading Sample Corpus and Queries...")
+        print("Step 2: Loading Sample Corpus and Queries...")
         corpus = load_sample_corpus()
         queries = load_sample_queries()
-        print(f"   ✓ Loaded {len(corpus)} documents")
-        print(f"   ✓ Loaded {len(queries)} test queries\n")
+        print(f"Loaded {len(corpus)} documents")
+        print(f"Loaded {len(queries)} test queries\n")
         
         # Step 3: Test Weaviate Connection
-        print("🔌 Step 3: Testing Weaviate Connection...")
+        print("Step 3: Testing Weaviate Connection...")
         try:
             test_db = WeaviateVectorDB(collection_name="ConnectionTest")
             test_db.close()  # Use our close method instead
-            print("   ✓ Weaviate connection successful\n")
+            print("Weaviate connection successful\n")
         except Exception as e:
-            print(f"   ❌ Connection failed: {e}")
-            print("\n⚠️  Please ensure Weaviate is running on localhost:8081")
+            print(f"Connection failed: {e}")
+            print("\nPlease ensure Weaviate is running on localhost:8081")
             print("   Start Weaviate with: docker-compose up -d")
             return
         
         # Step 4: Initialize Benchmark
-        print("🔬 Step 4: Initializing Benchmark Suite...")
+        print("Step 4: Initializing Benchmark Suite...")
         benchmark = VectorDBBenchmark(generator, corpus, queries)
         print()
         
         # Step 5: Run Benchmarks
-        print("🚀 Step 5: Running Benchmark Experiments...")
+        print("Step 5: Running Benchmark Experiments...")
         print("   This may take several minutes...\n")
         
         results_df = benchmark.run_benchmark(
@@ -235,25 +235,25 @@ def main():
         )
         
         # Step 6: Analyze Results
-        print("\n📊 Step 6: Analyzing Results...")
+        print("\nStep 6: Analyzing Results...")
         best_config = benchmark.get_best_configuration(results_df, optimize_for="balanced")
-        print("   ✓ Analysis complete\n")
+        print("     Analysis complete\n")
         
         # Step 7: Save Results
-        print("💾 Step 7: Saving Results...")
+        print("Step 7: Saving Results...")
         output_file = "results.csv"
         results_df.to_csv(output_file, index=False)
-        print(f"   ✓ Results saved to: {output_file}\n")
+        print(f"     Results saved to: {output_file}\n")
         
         # Step 8: Display Summary
         print_results_summary(results_df, best_config)
         
         # Execution time
         elapsed_time = time.time() - start_time
-        print(f"⏱️  Total Execution Time: {elapsed_time:.2f} seconds\n")
+        print(f"Total Execution Time: {elapsed_time:.2f} seconds\n")
         
         # Recommendations
-        print("💡 OPTIMIZATION RECOMMENDATIONS")
+        print("OPTIMIZATION RECOMMENDATIONS")
         print("─"*70)
         print("• For low latency: Use lower ef values (32-64)")
         print("• For high recall: Use higher ef_construction (256+) and ef (128+)")
@@ -262,18 +262,18 @@ def main():
         print("• Monitor query patterns and adjust ef dynamically if needed")
         print(f"\n{'='*70}\n")
         
-        print("✅ Optimization complete! Check results.csv for detailed metrics.\n")
+        print("Optimization complete! Check results.csv for detailed metrics.\n")
         
     except FileNotFoundError as e:
-        print(f"\n❌ Error: Required file not found - {e}")
+        print(f"\nError: Required file not found - {e}")
         print("   Please ensure all dependencies are installed.")
         
     except ConnectionError as e:
-        print(f"\n❌ Connection Error: {e}")
+        print(f"\nConnection Error: {e}")
         print("   Please check your Weaviate instance and API keys.")
         
     except Exception as e:
-        print(f"\n❌ Unexpected Error: {e}")
+        print(f"\nUnexpected Error: {e}")
         print("   Please check the error message and try again.")
         import traceback
         traceback.print_exc()
