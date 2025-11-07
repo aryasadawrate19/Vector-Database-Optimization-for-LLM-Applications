@@ -262,7 +262,7 @@ The `visualize_results.py` script provides:
 
 All visualizations are saved to the `visualizations/` directory and can be easily shared or embedded in reports.
 
-## �🔄 Next Steps
+## 🔄 Next Steps
 
 Extend this MVP with:
 
