@@ -45,7 +45,7 @@ class WeaviateVectorDB:
             
             # Test connection
             if self.client.is_ready():
-                print(f"✓ Connected to Weaviate at {self.url}")
+                print(f"   Connected to Weaviate at {self.url}")
             else:
                 raise ConnectionError("Weaviate is not ready")
                 
@@ -77,7 +77,7 @@ class WeaviateVectorDB:
             # Delete existing class if it exists
             if self.client.schema.exists(self.collection_name):
                 self.client.schema.delete_class(self.collection_name)
-                print(f"✓ Deleted existing class: {self.collection_name}")
+                print(f"   Deleted existing class: {self.collection_name}")
             
             # Create class schema with HNSW configuration
             class_obj = {
@@ -108,7 +108,7 @@ class WeaviateVectorDB:
             
             self.client.schema.create_class(class_obj)
             
-            print(f"✓ Created collection: {self.collection_name}")
+            print(f"   Created collection: {self.collection_name}")
             print(f"  - Vector dimension: {vector_dimension}")
             print(f"  - HNSW ef_construction: {ef_construction}")
             print(f"  - HNSW ef: {ef}")
@@ -167,7 +167,7 @@ class WeaviateVectorDB:
                         vector=embedding
                     )
             
-            print(f"✓ Inserted {len(texts)} objects into Weaviate")
+            print(f"   Inserted {len(texts)} objects into Weaviate")
             return len(texts)
             
         except Exception as e:
@@ -250,7 +250,7 @@ class WeaviateVectorDB:
         try:
             if self.client.schema.exists(self.collection_name):
                 self.client.schema.delete_class(self.collection_name)
-                print(f"✓ Deleted collection: {self.collection_name}")
+                print(f"   Deleted collection: {self.collection_name}")
         except Exception as e:
             print(f"Warning: Failed to delete collection: {e}")
     
@@ -285,12 +285,12 @@ if __name__ == "__main__":
         
         # Get stats
         stats = db.get_collection_stats()
-        print(f"\n✓ Collection stats: {stats}")
+        print(f"\nCollection stats: {stats}")
         
         # Perform search
         query_vector = [random.random() for _ in range(768)]
         results = db.search(query_vector, limit=3)
-        print(f"\n✓ Search returned {len(results)} results")
+        print(f"\nSearch returned {len(results)} results")
         
         # Close connection
         db.close()
