@@ -15,9 +15,9 @@ db.insert_data(["Test document"], [test_embedding], show_progress=False)
 print("\nAttempting search...")
 try:
     results = db.search(test_embedding, limit=1)
-    print(f"✓ Search successful! Found {len(results)} results")
-    print(f"  Result: {results[0]['text']}")
+    print(f"Search successful! Found {len(results)} results")
+    print(f"Result: {results[0]['text']}")
 except Exception as e:
-    print(f"✗ Search failed: {e}")
+    print(f" Search failed: {e}")
 
 db.close()

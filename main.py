@@ -214,7 +214,7 @@ def main():
         except Exception as e:
             print(f"Connection failed: {e}")
             print("\nPlease ensure Weaviate is running on localhost:8081")
-            print("   Start Weaviate with: docker-compose up -d")
+            print("Start Weaviate with: docker-compose up -d")
             return
         
         # Step 4: Initialize Benchmark
@@ -224,7 +224,7 @@ def main():
         
         # Step 5: Run Benchmarks
         print("Step 5: Running Benchmark Experiments...")
-        print("   This may take several minutes...\n")
+        print("This may take several minutes...\n")
         
         results_df = benchmark.run_benchmark(
             ef_construction_values=[64, 128, 256],
@@ -237,13 +237,13 @@ def main():
         # Step 6: Analyze Results
         print("\nStep 6: Analyzing Results...")
         best_config = benchmark.get_best_configuration(results_df, optimize_for="balanced")
-        print("     Analysis complete\n")
+        print("Analysis complete\n")
         
         # Step 7: Save Results
         print("Step 7: Saving Results...")
         output_file = "results.csv"
         results_df.to_csv(output_file, index=False)
-        print(f"     Results saved to: {output_file}\n")
+        print(f"Results saved to: {output_file}\n")
         
         # Step 8: Display Summary
         print_results_summary(results_df, best_config)
@@ -266,15 +266,15 @@ def main():
         
     except FileNotFoundError as e:
         print(f"\nError: Required file not found - {e}")
-        print("   Please ensure all dependencies are installed.")
+        print("Please ensure all dependencies are installed.")
         
     except ConnectionError as e:
         print(f"\nConnection Error: {e}")
-        print("   Please check your Weaviate instance and API keys.")
+        print("Please check your Weaviate instance and API keys.")
         
     except Exception as e:
         print(f"\nUnexpected Error: {e}")
-        print("   Please check the error message and try again.")
+        print("Please check the error message and try again.")
         import traceback
         traceback.print_exc()
 

@@ -45,7 +45,7 @@ class EmbeddingGenerator:
         self.cache_file = self.cache_dir / "embeddings_cache.pkl"
         self.cache = self._load_cache()
         
-        print(f"✓ Embedding Generator initialized with Gemini API")
+        print(f" Embedding Generator initialized with Gemini API")
     
     def _load_cache(self) -> Dict:
         """Load cached embeddings from disk."""
@@ -143,7 +143,7 @@ class EmbeddingGenerator:
         self.cache = {}
         if self.cache_file.exists():
             self.cache_file.unlink()
-        print("✓ Cache cleared")
+        print(" Cache cleared")
 
 
 # Example usage
@@ -164,9 +164,9 @@ if __name__ == "__main__":
         embeddings = generator.generate_embeddings_batch(sample_texts)
         
         # Display results
-        print(f"\n✓ Generated {len(embeddings)} embeddings")
-        print(f"✓ Embedding dimension: {len(embeddings[0])}")
-        print(f"✓ First embedding (truncated): {embeddings[0][:5]}...")
+        print(f"\n Generated {len(embeddings)} embeddings")
+        print(f" Embedding dimension: {len(embeddings[0])}")
+        print(f" First embedding (truncated): {embeddings[0][:5]}...")
         
     except Exception as e:
         print(f"✗ Error: {e}")

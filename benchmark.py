@@ -38,7 +38,7 @@ class VectorDBBenchmark:
         self.test_queries = test_queries
         self.results = []
         
-        print(f"✓ Benchmark initialized")
+        print(f" Benchmark initialized")
         print(f"  - Corpus size: {len(corpus)} documents")
         print(f"  - Test queries: {len(test_queries)}")
     
@@ -260,9 +260,9 @@ class VectorDBBenchmark:
             db.delete_collection()
             db.close()
             
-            print(f"  ✓ Avg Query Time: {avg_query_time:.2f} ms")
-            print(f"  ✓ Recall@{k}: {avg_recall:.1f}%")
-            print(f"  ✓ Throughput: {throughput:.1f} queries/sec")
+            print(f"   Avg Query Time: {avg_query_time:.2f} ms")
+            print(f"   Recall@{k}: {avg_recall:.1f}%")
+            print(f"   Throughput: {throughput:.1f} queries/sec")
             
             return {
                 "ef_construction": ef_construction,
@@ -278,7 +278,7 @@ class VectorDBBenchmark:
             }
             
         except Exception as e:
-            print(f"  ✗ Configuration failed: {e}")
+            print(f"   Configuration failed: {e}")
             return {
                 "ef_construction": ef_construction,
                 "ef": ef,
@@ -374,7 +374,7 @@ if __name__ == "__main__":
         
         # Find best configuration
         best = benchmark.get_best_configuration(results_df, optimize_for="balanced")
-        print(f"\n✓ Best configuration: {best}")
+        print(f"\n Best configuration: {best}")
         
     except Exception as e:
-        print(f"✗ Error: {e}")
+        print(f" Error: {e}")
