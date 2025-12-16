@@ -12,6 +12,8 @@ import time
 from embedding_generator import EmbeddingGenerator
 from weaviate_client import WeaviateVectorDB
 from benchmark import VectorDBBenchmark
+from dataset_loader import load_general_knowledge_dataset
+
 
 
 def load_sample_corpus() -> List[str]:
@@ -199,12 +201,13 @@ def main():
         print(f"Embedding dimension: {embedding_dim}\n")
         
         # Step 2: Load Data
-        print("Step 2: Loading Sample Corpus and Queries...")
-        corpus = load_sample_corpus()
-        queries = load_sample_queries()
+        print("Step 2: Loading General Knowledge Dataset...")
+        corpus, queries = load_general_knowledge_dataset(
+            max_corpus=30000,
+            max_queries=3000
+        )
         print(f"Loaded {len(corpus)} documents")
         print(f"Loaded {len(queries)} test queries\n")
-        
         # Step 3: Test Weaviate Connection
         print("Step 3: Testing Weaviate Connection...")
         try:
@@ -227,12 +230,13 @@ def main():
         print("This may take several minutes...\n")
         
         results_df = benchmark.run_benchmark(
-            ef_construction_values=[64, 128, 256],
-            ef_values=[32, 64, 128],
-            max_connections_values=[16, 32],
-            k=10,
-            num_iterations=3
+        ef_construction_values=[64, 128],
+        ef_values=[16, 32, 64],
+        max_connections_values=[16, 32],
+        k=10,
+        num_iterations=1
         )
+
         
         # Step 6: Analyze Results
         print("\nStep 6: Analyzing Results...")

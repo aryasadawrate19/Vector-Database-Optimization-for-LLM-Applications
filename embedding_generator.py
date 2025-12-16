@@ -77,6 +77,8 @@ class EmbeddingGenerator:
         Returns:
             List of floats representing the embedding vector.
         """
+        if not text or not text.strip():
+            raise ValueError("Empty text passed for embedding")
         # Check cache first
         cache_key = f"{task_type}:{text}"
         if cache_key in self.cache:
