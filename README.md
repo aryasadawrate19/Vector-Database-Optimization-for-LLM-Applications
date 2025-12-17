@@ -2,7 +2,7 @@
 
 A working MVP that optimizes Weaviate vector database performance for LLM-based applications by benchmarking different HNSW indexing configurations.
 
-## 🎯 Project Overview
+## Project Overview
 
 This project demonstrates how to:
 1. Generate text embeddings using Google's Gemini API
@@ -11,7 +11,7 @@ This project demonstrates how to:
 4. Measure and optimize for query latency, recall, and throughput
 5. Provide actionable optimization recommendations
 
-## 📋 Features
+## Features
 
 - **Modular Architecture**: Clean separation of concerns with dedicated modules
 - **Embeddings Generation**: Uses Google Gemini API for high-quality text embeddings
@@ -22,7 +22,7 @@ This project demonstrates how to:
 - **Progress Tracking**: Visual progress bars for long-running operations
 - **Results Export**: Saves detailed metrics to CSV for further analysis
 
-## 🛠️ Prerequisites
+## Prerequisites
 
 1. **Python 3.8+**
 2. **Weaviate** running locally on port 8081
@@ -54,7 +54,7 @@ docker-compose up -d
 curl http://localhost:8081/v1/meta
 ```
 
-## 📦 Installation
+## Installation
 
 1. **Clone or navigate to the project directory**
 
@@ -78,7 +78,7 @@ GEMINI_API_KEY=your_actual_api_key_here
 WEAVIATE_URL=http://localhost:8081
 ```
 
-## 🚀 Usage
+## Usage
 
 ### Quick Start
 
@@ -136,20 +136,20 @@ python benchmark.py
 ```
 === VECTOR DATABASE OPTIMIZATION RESULTS ===
 
-📊 OVERALL STATISTICS
+OVERALL STATISTICS
 ──────────────────────────────────────────────────────────────────────
 Total Configurations Tested: 18
 Corpus Size: 50 documents
 Number of Test Queries: 10
 
-🏆 BEST CONFIGURATION (Balanced Optimization)
+BEST CONFIGURATION (Balanced Optimization)
 ──────────────────────────────────────────────────────────────────────
 Index Type: HNSW
 ef_construction: 128
 ef (search): 64
 max_connections: 32
 
-⚡ PERFORMANCE METRICS
+PERFORMANCE METRICS
 ──────────────────────────────────────────────────────────────────────
 Average Query Time: 42.6 ms
 Std Dev Query Time: 8.3 ms
@@ -157,14 +157,14 @@ Recall@10: 96.8%
 Throughput: 23.5 queries/sec
 Insert Time: 1.2 sec
 
-💡 OPTIMIZATION RECOMMENDATIONS
+OPTIMIZATION RECOMMENDATIONS
 ──────────────────────────────────────────────────────────────────────
 • For low latency: Use lower ef values (32-64)
 • For high recall: Use higher ef_construction (256+) and ef (128+)
 • For balanced performance: Use the best configuration shown above
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 MVP/
@@ -182,7 +182,7 @@ MVP/
 └── visualizations/         # Generated charts and analysis (generated)
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### HNSW Parameters
 
@@ -211,18 +211,18 @@ results_df = benchmark.run_benchmark(
 )
 ```
 
-## 📊 Understanding the Metrics
+## Understanding the Metrics
 
 - **Query Latency**: Time to execute a similarity search (lower is better)
 - **Recall@K**: Percentage of relevant results in top-K (higher is better)
 - **Throughput**: Number of queries processed per second (higher is better)
 - **Insert Time**: Time to index the corpus (lower is better)
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Weaviate Connection Error
 ```
-❌ Failed to connect to Weaviate at http://localhost:8081
+Failed to connect to Weaviate at http://localhost:8081
 ```
 **Solution**: Ensure Weaviate is running:
 ```bash
@@ -248,7 +248,7 @@ ModuleNotFoundError: No module named 'weaviate'
 pip install -r requirements.txt
 ```
 
-## � Visualization Features
+## Visualization Features
 
 The `visualize_results.py` script provides:
 
@@ -262,7 +262,7 @@ The `visualize_results.py` script provides:
 
 All visualizations are saved to the `visualizations/` directory and can be easily shared or embedded in reports.
 
-## 🔄 Next Steps
+## Next Steps
 
 Extend this MVP with:
 
@@ -274,15 +274,15 @@ Extend this MVP with:
 6. **Web Interface**: Build a dashboard for interactive benchmarking
 7. **Production Optimization**: Add monitoring, logging, and alerts
 
-## 📝 License
+## License
 
 This is an educational MVP project for demonstration purposes.
 
-## 🤝 Contributing
+## Contributing
 
 Feel free to fork, modify, and extend this project for your use case!
 
-## 📧 Support
+## Support
 
 For issues or questions, please check:
 - [Weaviate Documentation](https://weaviate.io/developers/weaviate)
