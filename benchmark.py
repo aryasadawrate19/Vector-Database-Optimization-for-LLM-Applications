@@ -263,3 +263,46 @@ class VectorDBBenchmark:
             "num_queries": len(query_embeddings),
             "num_iterations": num_iterations
         }
+
+    def get_best_configuration(
+        self,
+        df: pd.DataFrame,
+        optimize_for: str = "balanced"
+    ) -> dict:
+        if df.empty:
+            return {}
+
+        df_valid = df[df["index_type"] == "hnsw"].copy()
+        if df_valid.empty:
+            return {}
+
+        recall_col = [c for c in df_valid.columns if "recall_at" in c][0]
+
+        if optimize_for == "latency":
+            best_idx = df_valid["avg_query_time_ms"].idxmin()
+
+        elif optimize_for == "recall":
+            best_idx = df_valid[recall_col].idxmax()
+
+        else:
+            latency_norm = (
+                df_valid["avg_query_time_ms"] - df_valid["avg_query_time_ms"].min()
+            ) / (
+                df_valid["avg_query_time_ms"].max()
+                - df_valid["avg_query_time_ms"].min()
+                + 1e-9
+            )
+
+            recall_norm = (
+                df_valid[recall_col] - df_valid[recall_col].min()
+            ) / (
+                df_valid[recall_col].max()
+                - df_valid[recall_col].min()
+                + 1e-9
+            )
+
+            score = 0.5 * (1 - latency_norm) + 0.5 * recall_norm
+            best_idx = score.idxmax()
+
+        return df_valid.loc[best_idx].to_dict()
+

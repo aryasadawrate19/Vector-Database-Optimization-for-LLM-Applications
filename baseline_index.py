@@ -1,5 +1,6 @@
 import numpy as np
 from typing import List, Tuple
+import time
 
 
 class ExactBaselineIndex:
@@ -30,9 +31,9 @@ class ExactBaselineIndex:
         query = np.array(query_vector)
         query = query / np.linalg.norm(query)
 
-        start = np.perf_counter()
+        start = time.perf_counter()
         similarities = np.dot(self.embeddings, query)
         top_k = np.argsort(similarities)[::-1][:k]
-        latency_ms = (np.perf_counter() - start) * 1000
+        latency_ms = (time.perf_counter() - start) * 1000
 
         return top_k.tolist(), latency_ms

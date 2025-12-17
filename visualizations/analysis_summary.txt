@@ -1,35 +1,43 @@
 ======================================================================
-VECTOR DATABASE BENCHMARK - VISUAL ANALYSIS SUMMARY
+VECTOR DATABASE BENCHMARK – ANALYSIS SUMMARY
 ======================================================================
 
-KEY FINDINGS:
+DATASET OVERVIEW
+----------------------------------------------------------------------
+Total configurations evaluated: 12
+Index type: HNSW (Exact baseline excluded)
+
+BEST CONFIGURATION (LOWEST LATENCY)
+----------------------------------------------------------------------
+ef_construction: 64
+ef: 16
+max_connections: 16
+Average query time: 53.18 ms
+Recall: 77.90%
+Throughput: 18.80 qps
+
+BEST CONFIGURATION (HIGHEST RECALL)
+----------------------------------------------------------------------
+ef_construction: 128
+ef: 64
+max_connections: 32
+Recall: 82.60%
+Average query time: 54.69 ms
+
+PARAMETER INSIGHTS
 ----------------------------------------------------------------------
 
-1. BEST OVERALL CONFIGURATION:
-   ef_construction: 64
-   ef: 16
-   max_connections: 32
-   Query Time: 54.55 ms
-   Recall: 82.1%
-   Throughput: 18.3 qps
+Impact of ef_construction:
+  64 → 53.64 ms
+  128 → 54.30 ms
 
-2. PERFORMANCE RANGE:
-   Query Time: 54.55 - 55.47 ms
-   Recall: 82.1 - 83.4%
-   Throughput: 18.0 - 18.3 qps
+Impact of ef:
+  16 → 53.30 ms
+  32 → 54.30 ms
+  64 → 54.30 ms
 
-3. PARAMETER IMPACT:
-   ef_construction:
-     64: 55.03 ms avg
-     128: 54.82 ms avg
-
-   ef:
-     16: 54.68 ms avg
-     32: 55.12 ms avg
-     64: 54.97 ms avg
-
-   max_connections:
-     16: 54.97 ms avg
-     32: 54.88 ms avg
+Impact of max_connections:
+  16 → 53.85 ms
+  32 → 54.09 ms
 
 ======================================================================
